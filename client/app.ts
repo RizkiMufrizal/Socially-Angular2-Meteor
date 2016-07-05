@@ -9,6 +9,7 @@ import { ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig } from '@angular/route
 import { APP_BASE_HREF } from '@angular/common';
 
 import { HomeComponent } from './imports/home/home-component';
+import { PostComponent } from './imports/post/post-component';
 
 @Component({
   selector: 'app',
@@ -17,6 +18,7 @@ import { HomeComponent } from './imports/home/home-component';
 })
 @RouteConfig([
   { path: '/', name: 'Home', component: HomeComponent },
+  { path: '/post', name: 'Post', component: PostComponent }
 ])
 class Socially extends MeteorComponent { }
 
