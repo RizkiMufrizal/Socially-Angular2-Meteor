@@ -12,14 +12,43 @@
             </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
-            <button md-raised-button class="md-raised">
+            <button md-raised-button class="md-raised" (click)="sendLike(p)">
                 <md-icon>favorite</md-icon>
                 {{p.likes.length}}
             </button>
-            <button md-raised-button class="md-raised">
+            <button md-raised-button class="md-raised" (click)="newComment(dialogComment, p.comments)">
                 <md-icon>comment</md-icon>
                 {{p.comments.length}}
             </button>
         </md-card-actions>
     </md-card>
+
+    <div class="md-padding" id="popupContainer">
+        <div class="dialog-demo-content" layout-gt-md="row" layout="column" layout-margin>
+            <md-dialog #dialogComment>
+                <h2 class="md-title">Comment</h2>
+                <div>
+                    <md-list>
+                        <md-list-item class="md-2-line" *ngFor="let c of comments">
+                            <div class="md-list-item-text">
+                                <h3>{{c.username}}</h3>
+                                <p>{{c.comment}}</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <div layout="column" class="md-inline-form">
+                    <form>
+                      <md-input [(ngModel)]="comment" (keydown.enter)="sendComment(comment)" placeholder="Type a comment" style="width: 100%"></md-input>
+                    </form>
+                </div>
+                <md-dialog-actions>
+                    <button md-button class="md-primary" (click)="dialogComment.close(true)">
+                        <span>Close</span>
+                    </button>
+                </md-dialog-actions>
+            </md-dialog>
+        </div>
+    </div>
+
 </div>
