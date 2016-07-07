@@ -6,12 +6,14 @@ import { MD_INPUT_DIRECTIVES, MdInput } from '@angular2-material/input';
 import { MdList, MdListItem } from 'ng2-material/components/list/list';
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
+import { TimeAgoPipe } from 'angular2-moment';
 import * as _ from 'underscore';
 import { Posts } from '../../../collections/posts/posts';
 
 @Component({
   selector: 'post-component',
   templateUrl: '/client/imports/post/post-template.html',
+  pipes: [TimeAgoPipe],
   directives: [MdIcon, MdDialog, MdButton, MdList, MdListItem, MD_INPUT_DIRECTIVES, MdInput],
   providers: [MdIconRegistry]
 })
@@ -41,7 +43,6 @@ export class PostComponent implements OnInit {
       if (error) {
         console.log(error);
       }
-      console.log('sukses');
       this.inputPost = '';
     });
   }
