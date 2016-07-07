@@ -12,6 +12,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { HomeComponent } from './imports/home/home-component';
 import { PostComponent } from './imports/post/post-component';
 import { RegisterForm } from './imports/user/register-form';
+import { LoginForm } from './imports/user/login-form';
 
 @Component({
   selector: 'app',
@@ -21,7 +22,8 @@ import { RegisterForm } from './imports/user/register-form';
 @RouteConfig([
   { path: '/', name: 'Home', component: HomeComponent },
   { path: '/post', name: 'Post', component: PostComponent },
-  { path: '/register', name: 'Register', component: RegisterForm }
+  { path: '/register', name: 'Register', component: RegisterForm },
+  { path: '/login', name: 'Login', component: LoginForm }
 ])
 class Socially extends MeteorComponent { }
 
