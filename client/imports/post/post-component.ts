@@ -17,6 +17,8 @@ import { Posts } from '../../../collections/posts/posts';
 export class PostComponent implements OnInit {
 
   posts: Mongo.Cursor<Object>;
+  idPost: String;
+  inputComment: String;
   comments: Array<Object>;
 
   ngOnInit() {
@@ -27,11 +29,30 @@ export class PostComponent implements OnInit {
 
   newComment(d, c) {
     d.show();
-    this.comments = c;
+    this.comments = c.comments;
+    this.idPost = c._id;
   }
 
   sendComment(c) {
-    console.log(c);
+
+    //let user = Meteor.users.findOne(Meteor.userId());
+
+    this.comments.push({
+      username: 'test',
+      comment: c
+    });
+
+    Posts.update(
+      {
+        _id: this.idPost
+      }, {
+        $set: {
+          comments: this.comments
+        }
+      }
+    );
+
+    this.inputComment = '';
   }
 
   sendLike() {
