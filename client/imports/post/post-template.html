@@ -16,7 +16,7 @@
                 <md-icon>favorite</md-icon>
                 {{p.likes.length}}
             </button>
-            <button md-raised-button class="md-raised" (click)="newComment(dialogComment, p.comments)">
+            <button md-raised-button class="md-raised" (click)="newComment(dialogComment, p)">
                 <md-icon>comment</md-icon>
                 {{p.comments.length}}
             </button>
@@ -39,7 +39,7 @@
                 </div>
                 <div layout="column" class="md-inline-form">
                     <form>
-                      <md-input [(ngModel)]="comment" (keydown.enter)="sendComment(comment)" placeholder="Type a comment" style="width: 100%"></md-input>
+                      <md-input [(ngModel)]="inputComment" (keydown.enter)="sendComment(inputComment)" placeholder="Type a comment" style="width: 100%"></md-input>
                     </form>
                 </div>
                 <md-dialog-actions>
