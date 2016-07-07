@@ -26,7 +26,7 @@ export class RegisterForm implements OnInit {
 
   register(u) {
     Accounts.createUser({
-      email: u.email,
+      username: u.email,
       password: u.password,
       profile: {
         name: u.name,
