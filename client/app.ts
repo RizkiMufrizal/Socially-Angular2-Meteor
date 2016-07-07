@@ -25,6 +25,35 @@ import { LoginForm } from './imports/user/login-form';
   { path: '/register', name: 'Register', component: RegisterForm },
   { path: '/login', name: 'Login', component: LoginForm }
 ])
-class Socially extends MeteorComponent { }
+class Socially extends MeteorComponent {
+
+  idUser: String;
+
+  constructor() {
+    super();
+    this.autorun(() => {
+      this.idUser = Meteor.userId();
+    });
+  }
+
+  logout() {
+    let user = Meteor.users.findOne(Meteor.userId());
+
+    Meteor.users.update(
+      {
+        _id: user._id
+      }, {
+        $set: {
+          profile: {
+            name: user.profile.name,
+            status: 'offline'
+          }
+        }
+      }
+    );
+    Meteor.logout();
+  }
+
+}
 
 bootstrap(Socially, [ROUTER_PROVIDERS, MATERIAL_PROVIDERS, HTTP_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);
