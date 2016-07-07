@@ -1,12 +1,18 @@
 <md-toolbar>
-    <h2>
-        <a ui-sref="parties">
-            <span class="md-title">Socially</span>
-        </a>
-    </h2>
+    Socially Angular2 Meteor
+    <button md-button aria-label="Home" [routerLink]="['Home']">
+        Home
+    </button>
+    <button md-button aria-label="Post" [routerLink]="['Post']">
+        Post
+    </button>
     <span flex></span>
-    <div class="navbar-right navbar-text">
-        hello
-    </div>
+    <button md-button aria-label="Register" [routerLink]="['Register']">
+        Register
+    </button>
+    <button md-button aria-label="Login" [routerLink]="['Login']">
+        Login
+    </button>
 </md-toolbar>
+
 <router-outlet flex-gt-sm layout-gt-sm="row"></router-outlet>
