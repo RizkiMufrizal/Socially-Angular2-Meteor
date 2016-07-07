@@ -7,11 +7,14 @@
         Post
     </button>
     <span flex></span>
-    <button md-button aria-label="Register" [routerLink]="['Register']">
+    <button *ngIf="idUser === null" md-button aria-label="Register" [routerLink]="['Register']">
         Register
     </button>
-    <button md-button aria-label="Login" [routerLink]="['Login']">
+    <button *ngIf="idUser === null" md-button aria-label="Login" [routerLink]="['Login']">
         Login
+    </button>
+    <button *ngIf="idUser !== null" md-button aria-label="Logout" (click)="logout()">
+        Logout
     </button>
 </md-toolbar>
 
