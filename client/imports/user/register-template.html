@@ -1,0 +1,17 @@
+<div>
+  <md-grid-list cols="5">
+    <md-grid-tile></md-grid-tile>
+     <md-grid-tile></md-grid-tile>
+     <md-grid-tile>
+       <form [ngFormModel]="registerForm" #f="ngForm" (submit)="register(f.value)">
+         <md-input placeholder="Name" ngControl="name" style="width: 100%"></md-input>
+         <md-input placeholder="Email" ngControl="email" style="width: 100%"></md-input>
+         <md-input placeholder="Password" type="password" ngControl="password" style="width: 100%"></md-input>
+         <button md-raised-button class="md-raised md-primary">Register</button>
+         <button md-raised-button class="md-raised md-primary">Login</button>
+       </form>
+     </md-grid-tile>
+     <md-grid-tile></md-grid-tile>
+     <md-grid-tile></md-grid-tile>
+  </md-grid-list>
+</div>
