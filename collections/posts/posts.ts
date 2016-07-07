@@ -12,7 +12,7 @@ Posts.allow({
   update: () => {
     let user = Meteor.user();
 
-    return true;
+    return !!user;
   },
   remove: () => {
     let user = Meteor.user();
