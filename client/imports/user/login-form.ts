@@ -35,6 +35,7 @@ export class LoginForm implements OnInit {
           }, {
             $set: {
               profile: {
+                name: user.profile.name,
                 status: 'online'
               }
             }
