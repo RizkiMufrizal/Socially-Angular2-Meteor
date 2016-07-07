@@ -20,11 +20,29 @@ export class PostComponent implements OnInit {
   posts: Mongo.Cursor<Object>;
   idPost: String;
   inputComment: String;
+  inputPost: String;
   comments: Array<Object>;
 
   ngOnInit() {
     Meteor.subscribe('posts', () => {
       this.posts = Posts.find();
+    });
+  }
+
+  sendPost(p) {
+    Meteor.call('simpanPost', {
+      idUser: 'id',
+      username: 'test',
+      status: p,
+      dateTime: new Date(),
+      comments: [],
+      likes: []
+    }, (error) => {
+      if (error) {
+        console.log(error);
+      }
+      console.log('sukses');
+      this.inputPost = '';
     });
   }
 
@@ -73,10 +91,14 @@ export class PostComponent implements OnInit {
   sendLike(idPost, l) {
     let checkUser: Boolean;
 
-    for (let i = 0; i < l.length; i++) {
-      checkUser = 'id' === _.property('id')(l[i]);
-      if (checkUser === true) {
-        break;
+    if (l.length === 0) {
+      checkUser = false;
+    } else {
+      for (let i = 0; i < l.length; i++) {
+        checkUser = 'id' === _.property('id')(l[i]);
+        if (checkUser === true) {
+          break;
+        }
       }
     }
 
