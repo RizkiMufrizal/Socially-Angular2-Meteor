@@ -56,6 +56,20 @@ export class PostComponent implements OnInit {
     this.inputComment = '';
   }
 
+  checkIfUserLike(l) {
+    let checkUser: Boolean;
+
+    for (let i = 0; i < l.length; i++) {
+      checkUser = 'id' === _.property('id')(l[i]);
+      if (checkUser === true) {
+        break;
+      }
+    }
+
+    return checkUser;
+
+  }
+
   sendLike(idPost, l) {
     let checkUser: Boolean;
 
