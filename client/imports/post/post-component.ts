@@ -32,9 +32,10 @@ export class PostComponent implements OnInit {
   }
 
   sendPost(p) {
+    let name = Meteor.users.findOne(Meteor.userId()).profile.name;
     Meteor.call('simpanPost', {
-      idUser: 'id',
-      username: 'test',
+      idUser: Meteor.userId(),
+      name: name,
       status: p,
       dateTime: new Date(),
       comments: [],
@@ -55,10 +56,11 @@ export class PostComponent implements OnInit {
 
   sendComment(c) {
 
-    //let user = Meteor.users.findOne(Meteor.userId());
+    let name = Meteor.users.findOne(Meteor.userId()).profile.name;
 
     this.comments.push({
-      username: 'test',
+      idUser: Meteor.userId(),
+      name: name,
       comment: c
     });
 
@@ -77,9 +79,10 @@ export class PostComponent implements OnInit {
 
   checkIfUserLike(l) {
     let checkUser: Boolean;
+    let idUser = Meteor.userId();
 
     for (let i = 0; i < l.length; i++) {
-      checkUser = 'id' === _.property('id')(l[i]);
+      checkUser = 'idUser' === _.property('idUser')(l[i]);
       if (checkUser === true) {
         break;
       }
@@ -91,27 +94,30 @@ export class PostComponent implements OnInit {
 
   sendLike(idPost, l) {
     let checkUser: Boolean;
+    let idUser = Meteor.userId();
 
     if (l.length === 0) {
       checkUser = false;
     } else {
       for (let i = 0; i < l.length; i++) {
-        checkUser = 'id' === _.property('id')(l[i]);
+        checkUser = idUser === _.property('idUser')(l[i]);
         if (checkUser === true) {
           break;
         }
       }
     }
 
+    let name = Meteor.users.findOne(Meteor.userId()).profile.name;
+
     if (checkUser === false) {
       l.push({
-        id: 'id',
-        username: 'test'
+        idUser: idUser,
+        name: name,
       });
     } else {
       l = _.without(l, _.findWhere(l, {
-        id: 'id',
-        username: 'test'
+        idUser: Meteor.userId(),
+        name: name,
       }));
     }
 
