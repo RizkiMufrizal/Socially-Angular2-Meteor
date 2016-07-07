@@ -6,6 +6,7 @@ import { MD_INPUT_DIRECTIVES, MdInput } from '@angular2-material/input';
 import { MdList, MdListItem } from 'ng2-material/components/list/list';
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
+import * as _ from 'underscore';
 import { Posts } from '../../../collections/posts/posts';
 
 @Component({
@@ -55,7 +56,37 @@ export class PostComponent implements OnInit {
     this.inputComment = '';
   }
 
-  sendLike() {
+  sendLike(idPost, l) {
+    let checkUser: Boolean;
+
+    for (let i = 0; i < l.length; i++) {
+      checkUser = 'id' === _.property('id')(l[i]);
+      if (checkUser === true) {
+        break;
+      }
+    }
+
+    if (checkUser === false) {
+      l.push({
+        id: 'id',
+        username: 'test'
+      });
+    } else {
+      l = _.without(l, _.findWhere(l, {
+        id: 'id',
+        username: 'test'
+      }));
+    }
+
+    Posts.update(
+      {
+        _id: idPost
+      }, {
+        $set: {
+          likes: l
+        }
+      }
+    );
 
   }
 }
