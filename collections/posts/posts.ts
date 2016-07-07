@@ -9,6 +9,11 @@ Posts.allow({
 
     return !!user;
   },
+  update: () => {
+    let user = Meteor.user();
+
+    return true;
+  },
   remove: () => {
     let user = Meteor.user();
 
