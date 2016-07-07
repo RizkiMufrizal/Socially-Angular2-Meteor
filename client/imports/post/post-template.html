@@ -9,7 +9,7 @@
     <md-card *ngFor="let p of posts">
         <md-card-header>
             <md-card-header-text>
-                <span class="md-title">{{p.username}}</span>
+                <span class="md-title">{{p.name}}</span>
                 <span class="md-subhead">{{p.dateTime | amTimeAgo}}</span>
             </md-card-header-text>
         </md-card-header>
@@ -42,7 +42,7 @@
                     <md-list>
                         <md-list-item class="md-2-line" *ngFor="let c of comments">
                             <div class="md-list-item-text">
-                                <h3>{{c.username}}</h3>
+                                <h3>{{c.name}}</h3>
                                 <p>{{c.comment}}</p>
                             </div>
                         </md-list-item>
