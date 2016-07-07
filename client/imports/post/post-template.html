@@ -12,8 +12,12 @@
             </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
-            <button md-raised-button class="md-raised" (click)="sendLike(p._id, p.likes)">
+            <button *ngIf="checkIfUserLike(p.likes) === true" md-raised-button class="md-raised" (click)="sendLike(p._id, p.likes)">
                 <md-icon>favorite</md-icon>
+                {{p.likes.length}}
+            </button>
+            <button *ngIf="checkIfUserLike(p.likes) === false" md-raised-button class="md-raised" (click)="sendLike(p._id, p.likes)">
+                <md-icon>favorite_border</md-icon>
                 {{p.likes.length}}
             </button>
             <button md-raised-button class="md-raised" (click)="newComment(dialogComment, p)">
