@@ -12,7 +12,7 @@
             </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
-            <button md-raised-button class="md-raised" (click)="sendLike(p)">
+            <button md-raised-button class="md-raised" (click)="sendLike(p._id, p.likes)">
                 <md-icon>favorite</md-icon>
                 {{p.likes.length}}
             </button>
