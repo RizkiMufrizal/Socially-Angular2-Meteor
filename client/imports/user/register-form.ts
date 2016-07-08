@@ -5,6 +5,7 @@ import { MdButton } from 'ng2-material/components/button/button';
 import { FormBuilder, ControlGroup, Validators, Control } from '@angular/common';
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
+import { Router } from '@angular/router-deprecated';
 
 @Component({
   selector: 'register-form',
@@ -13,6 +14,8 @@ import { Meteor } from 'meteor/meteor';
 })
 export class RegisterForm implements OnInit {
   registerForm: ControlGroup;
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
     let rf = new FormBuilder();
@@ -40,6 +43,7 @@ export class RegisterForm implements OnInit {
       (<Control>this.registerForm.controls['email']).updateValue('');
       (<Control>this.registerForm.controls['password']).updateValue('');
       (<Control>this.registerForm.controls['name']).updateValue('');
+      this.router.navigate(['Login']);
     });
   }
 
