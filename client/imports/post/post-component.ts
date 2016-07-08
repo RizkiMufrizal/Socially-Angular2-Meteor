@@ -47,8 +47,7 @@ export class PostComponent extends SecureComponent implements OnInit {
     });
   }
 
-  newComment(d, c) {
-    d.show();
+  newComment(c) {
     this.comments = c.comments;
     this.idPost = c._id;
   }
@@ -74,21 +73,6 @@ export class PostComponent extends SecureComponent implements OnInit {
     );
 
     this.inputComment = '';
-  }
-
-  checkIfUserLike(l) {
-    let checkUser: Boolean;
-    let idUser = Meteor.userId();
-
-    for (let i = 0; i < l.length; i++) {
-      checkUser = 'idUser' === _.property('idUser')(l[i]);
-      if (checkUser === true) {
-        break;
-      }
-    }
-
-    return checkUser;
-
   }
 
   sendLike(idPost, l) {
