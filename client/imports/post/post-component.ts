@@ -9,6 +9,8 @@ import { Meteor } from 'meteor/meteor';
 import { TimeAgoPipe } from 'angular2-moment';
 import * as _ from 'underscore';
 import { Posts } from '../../../collections/posts/posts';
+import { SecureComponent } from '../secure/secure-component';
+import { Router } from '@angular/router-deprecated'
 
 @Component({
   selector: 'post-component',
@@ -17,13 +19,17 @@ import { Posts } from '../../../collections/posts/posts';
   directives: [MdIcon, MdDialog, MdButton, MdList, MdListItem, MD_INPUT_DIRECTIVES, MdInput],
   providers: [MdIconRegistry]
 })
-export class PostComponent implements OnInit {
+export class PostComponent extends SecureComponent implements OnInit {
 
   posts: Mongo.Cursor<Object>;
   idPost: String;
   inputComment: String;
   inputPost: String;
   comments: Array<Object>;
+
+  constructor(router: Router) {
+    super(router);
+  }
 
   ngOnInit() {
     Meteor.subscribe('posts', () => {
