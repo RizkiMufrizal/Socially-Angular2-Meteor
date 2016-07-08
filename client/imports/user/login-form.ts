@@ -43,8 +43,10 @@ export class LoginForm implements OnInit {
         );
 
         alert('berhasil login');
+        window.location.href = '/post';
       }
     });
+
   }
 
 }
