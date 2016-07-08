@@ -6,7 +6,7 @@ import { Component, provide } from '@angular/core';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { bootstrap } from 'angular2-meteor-auto-bootstrap';
 import { MeteorComponent } from 'angular2-meteor';
-import { ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig } from '@angular/router-deprecated';
+import { ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, Router } from '@angular/router-deprecated';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { HomeComponent } from './imports/home/home-component';
@@ -29,7 +29,7 @@ class Socially extends MeteorComponent {
 
   idUser: String;
 
-  constructor() {
+  constructor(private router: Router) {
     super();
     this.autorun(() => {
       this.idUser = Meteor.userId();
@@ -52,6 +52,7 @@ class Socially extends MeteorComponent {
       }
     );
     Meteor.logout();
+    this.router.navigate(['Login']);
   }
 
 }
