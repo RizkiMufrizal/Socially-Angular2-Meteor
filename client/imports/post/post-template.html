@@ -1,38 +1,66 @@
 <div>
-    <md-card class="demo-card demo-basic">
-        <md-card-content>
-            <form>
-                  <md-input [(ngModel)]="inputPost" (keydown.enter)="sendPost(inputPost)" placeholder="Type a Status" style="width: 100%"></md-input>
-            </form>
-        </md-card-content>
-    </md-card>
-    <md-card *ngFor="let p of posts">
-        <md-card-header>
-            <md-card-header-text>
-                <span class="md-title">{{p.name}}</span>
-                <span class="md-subhead">{{p.dateTime | amTimeAgo}}</span>
-            </md-card-header-text>
-        </md-card-header>
-        <md-card-title>
-            <md-card-title-text>
-                {{p.status}}
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="start center">
-            <button *ngIf="checkIfUserLike(p.likes) === true" md-raised-button class="md-raised" (click)="sendLike(p._id, p.likes)">
-                <md-icon>favorite</md-icon>
-                {{p.likes.length}}
-            </button>
-            <button *ngIf="checkIfUserLike(p.likes) === false || p.likes.length === 0" md-raised-button class="md-raised" (click)="sendLike(p._id, p.likes)">
-                <md-icon>favorite_border</md-icon>
-                {{p.likes.length}}
-            </button>
-            <button md-raised-button class="md-raised" (click)="newComment(dialogComment, p)">
-                <md-icon>comment</md-icon>
-                {{p.comments.length}}
-            </button>
-        </md-card-actions>
-    </md-card>
+    <md-grid-list cols="4">
+        <md-grid-tile [colspan]="3" [rowspan]="1">
+
+            <div style="padding-top:430px" flex="150" layout="column">
+
+                <md-card>
+                    <md-card-content>
+                        <form>
+                            <md-input [(ngModel)]="inputPost" (keydown.enter)="sendPost(inputPost)" placeholder="Type a Status" style="width: 100%"></md-input>
+                        </form>
+                    </md-card-content>
+                </md-card>
+
+                <md-card *ngFor="let p of posts">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">{{p.name}}</span>
+                            <span class="md-subhead">{{p.dateTime | amTimeAgo}}</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-title>
+                        <md-card-title-text>
+                            {{p.status}}
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="start center">
+                        <button *ngIf="checkIfUserLike(p.likes) === true" md-raised-button class="md-raised" (click)="sendLike(p._id, p.likes)">
+                            <md-icon>favorite</md-icon>
+                            {{p.likes.length}}
+                        </button>
+                        <button *ngIf="checkIfUserLike(p.likes) === false || p.likes.length === 0" md-raised-button class="md-raised" (click)="sendLike(p._id, p.likes)">
+                            <md-icon>favorite_border</md-icon>
+                            {{p.likes.length}}
+                        </button>
+                        <button md-raised-button class="md-raised" (click)="newComment(dialogComment, p)">
+                            <md-icon>comment</md-icon>
+                            {{p.comments.length}}
+                        </button>
+                    </md-card-actions>
+                </md-card>
+
+            </div>
+
+        </md-grid-tile>
+        <md-grid-tile [colspan]="1">
+            <md-list dense>
+                <md-divider></md-divider>
+                <md-list-item>
+                    Pepper
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item>
+                    Salt
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item>
+                    Paprika
+                </md-list-item>
+                <md-divider></md-divider>
+            </md-list>
+        </md-grid-tile>
+    </md-grid-list>
 
     <div class="md-padding" id="popupContainer">
         <div class="dialog-demo-content" layout-gt-md="row" layout="column" layout-margin>
