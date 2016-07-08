@@ -10,13 +10,14 @@ import { TimeAgoPipe } from 'angular2-moment';
 import * as _ from 'underscore';
 import { Posts } from '../../../collections/posts/posts';
 import { SecureComponent } from '../secure/secure-component';
-import { Router } from '@angular/router-deprecated'
+import { Router } from '@angular/router-deprecated';
+import { MD_GRID_LIST_DIRECTIVES, MdGridList } from '@angular2-material/grid-list';
 
 @Component({
   selector: 'post-component',
   templateUrl: '/client/imports/post/post-template.html',
   pipes: [TimeAgoPipe],
-  directives: [MdIcon, MdDialog, MdButton, MdList, MdListItem, MD_INPUT_DIRECTIVES, MdInput],
+  directives: [MdIcon, MdDialog, MdButton, MdList, MdListItem, MD_INPUT_DIRECTIVES, MdInput, MD_GRID_LIST_DIRECTIVES, MdGridList],
   providers: [MdIconRegistry]
 })
 export class PostComponent extends SecureComponent implements OnInit {
