@@ -17,7 +17,7 @@ export class RegisterForm implements OnInit {
     let rf = new FormBuilder();
 
     this.registerForm = rf.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required],
       name: ['', Validators.required]
     });
@@ -25,7 +25,7 @@ export class RegisterForm implements OnInit {
 
   register(u) {
     Accounts.createUser({
-      username: u.email,
+      username: u.username,
       password: u.password,
       profile: {
         name: u.name,
@@ -36,7 +36,7 @@ export class RegisterForm implements OnInit {
         console.log(error);
       }
 
-      (<Control>this.registerForm.controls['email']).updateValue('');
+      (<Control>this.registerForm.controls['username']).updateValue('');
       (<Control>this.registerForm.controls['password']).updateValue('');
       (<Control>this.registerForm.controls['name']).updateValue('');
       this.router.navigate(['Login']);
