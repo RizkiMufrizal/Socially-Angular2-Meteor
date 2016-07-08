@@ -1,92 +1,65 @@
-<div>
-    <md-grid-list cols="4">
-        <md-grid-tile [colspan]="3" [rowspan]="1">
+<div class="container padding-template">
+    <div class="row">
+        <div class="col-md-8">
 
-            <div style="padding-top:430px" flex="150" layout="column">
+            <input type="text" class="form-control" [(ngModel)]="inputPost" (keydown.enter)="sendPost(inputPost)" placeholder="Type a Status"/>
+            <p></p>
 
-                <md-card>
-                    <md-card-content>
-                        <form>
-                            <md-input [(ngModel)]="inputPost" (keydown.enter)="sendPost(inputPost)" placeholder="Type a Status" style="width: 100%"></md-input>
-                        </form>
-                    </md-card-content>
-                </md-card>
-
-                <md-card *ngFor="let p of posts">
-                    <md-card-header>
-                        <md-card-header-text>
-                            <span class="md-title">{{p.name}}</span>
-                            <span class="md-subhead">{{p.dateTime | amTimeAgo}}</span>
-                        </md-card-header-text>
-                    </md-card-header>
-                    <md-card-title>
-                        <md-card-title-text>
-                            {{p.status}}
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-card-actions layout="row" layout-align="start center">
-                        <button *ngIf="checkIfUserLike(p.likes) === true" md-raised-button class="md-raised" (click)="sendLike(p._id, p.likes)">
-                            <md-icon>favorite</md-icon>
-                            {{p.likes.length}}
-                        </button>
-                        <button *ngIf="checkIfUserLike(p.likes) === false || p.likes.length === 0" md-raised-button class="md-raised" (click)="sendLike(p._id, p.likes)">
-                            <md-icon>favorite_border</md-icon>
-                            {{p.likes.length}}
-                        </button>
-                        <button md-raised-button class="md-raised" (click)="newComment(dialogComment, p)">
-                            <md-icon>comment</md-icon>
-                            {{p.comments.length}}
-                        </button>
-                    </md-card-actions>
-                </md-card>
-
+            <div class="card" *ngFor="let p of posts">
+                <div class="card-block">
+                    <h4 class="card-title">{{p.name}}</h4>
+                    <p class="card-text">
+                        <small class="text-muted">{{p.dateTime | amTimeAgo}}</small>
+                    </p>
+                    <p class="card-text">{{p.status}}</p>
+                    <button (click)="sendLike(p._id, p.likes)" class="btn btn-link card-link">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        {{p.likes.length}}
+                        Like
+                    </button>
+                    <button (click)="newComment(p)" class="btn btn-link card-link" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                        {{p.comments.length}}
+                        Comment
+                    </button>
+                </div>
             </div>
 
-        </md-grid-tile>
-        <md-grid-tile [colspan]="1">
-            <md-list dense>
-                <md-divider></md-divider>
-                <md-list-item>
-                    Pepper
-                </md-list-item>
-                <md-divider></md-divider>
-                <md-list-item>
-                    Salt
-                </md-list-item>
-                <md-divider></md-divider>
-                <md-list-item>
-                    Paprika
-                </md-list-item>
-                <md-divider></md-divider>
-            </md-list>
-        </md-grid-tile>
-    </md-grid-list>
+        </div>
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
+                <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
+                <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>
+                <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+            </ul>
+        </div>
+    </div>
 
-    <div class="md-padding" id="popupContainer">
-        <div class="dialog-demo-content" layout-gt-md="row" layout="column" layout-margin>
-            <md-dialog #dialogComment>
-                <h2 class="md-title">Comment</h2>
-                <div>
-                    <md-list>
-                        <md-list-item class="md-2-line" *ngFor="let c of comments">
-                            <div class="md-list-item-text">
-                                <h3>{{c.name}}</h3>
-                                <p>{{c.comment}}</p>
-                            </div>
-                        </md-list-item>
-                    </md-list>
-                </div>
-                <div layout="column" class="md-inline-form">
-                    <form>
-                        <md-input [(ngModel)]="inputComment" (keydown.enter)="sendComment(inputComment)" placeholder="Type a comment" style="width: 100%"></md-input>
-                    </form>
-                </div>
-                <md-dialog-actions>
-                    <button md-button class="md-primary" (click)="dialogComment.close(true)">
-                        <span>Close</span>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
-                </md-dialog-actions>
-            </md-dialog>
+                    <h4 class="modal-title" id="myModalLabel">Comment</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item" *ngFor="let c of comments">
+                            <h4 class="list-group-item-heading">{{c.name}}</h4>
+                            <p class="list-group-item-text">{{c.comment}}</p>
+                        </a>
+                    </div>
+                    <p></p>
+                    <input type="text" class="form-control" [(ngModel)]="inputComment" (keydown.enter)="sendComment(inputComment)" placeholder="Type a comment"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 
