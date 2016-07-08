@@ -19,7 +19,11 @@ export class LoginForm implements OnInit {
   }
 
   loginProcess(u) {
-    Meteor.loginWithPassword(u.email, u.password, function(error) {
+
+    let username: string = u.username;
+    let password: string = u.password;
+
+    Meteor.loginWithPassword(username, password, (error) => {
       if (typeof error !== 'undefined') {
         alert(error.reason);
       } else {
