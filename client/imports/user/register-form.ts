@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MD_INPUT_DIRECTIVES, MdInput } from '@angular2-material/input';
-import { MD_GRID_LIST_DIRECTIVES, MdGridList } from '@angular2-material/grid-list';
-import { MdButton } from 'ng2-material/components/button/button';
 import { FormBuilder, ControlGroup, Validators, Control } from '@angular/common';
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
@@ -9,8 +6,7 @@ import { Router } from '@angular/router-deprecated';
 
 @Component({
   selector: 'register-form',
-  templateUrl: '/client/imports/user/register-template.html',
-  directives: [MD_INPUT_DIRECTIVES, MdInput, MD_GRID_LIST_DIRECTIVES, MdGridList, MdButton]
+  templateUrl: '/client/imports/user/register-template.html'
 })
 export class RegisterForm implements OnInit {
   registerForm: ControlGroup;

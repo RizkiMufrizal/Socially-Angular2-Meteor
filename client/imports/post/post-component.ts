@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
-import { MdDialog, MdDialogActions, MdDialogTitle } from 'ng2-material/components/dialog';
-import { MdButton } from 'ng2-material/components/button/button';
-import { MD_INPUT_DIRECTIVES, MdInput } from '@angular2-material/input';
-import { MdList, MdListItem } from 'ng2-material/components/list/list';
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { TimeAgoPipe } from 'angular2-moment';
@@ -11,14 +6,11 @@ import * as _ from 'underscore';
 import { Posts } from '../../../collections/posts/posts';
 import { SecureComponent } from '../secure/secure-component';
 import { Router } from '@angular/router-deprecated';
-import { MD_GRID_LIST_DIRECTIVES, MdGridList } from '@angular2-material/grid-list';
 
 @Component({
   selector: 'post-component',
   templateUrl: '/client/imports/post/post-template.html',
-  pipes: [TimeAgoPipe],
-  directives: [MdIcon, MdDialog, MdButton, MdList, MdListItem, MD_INPUT_DIRECTIVES, MdInput, MD_GRID_LIST_DIRECTIVES, MdGridList],
-  providers: [MdIconRegistry]
+  pipes: [TimeAgoPipe]
 })
 export class PostComponent extends SecureComponent implements OnInit {
 

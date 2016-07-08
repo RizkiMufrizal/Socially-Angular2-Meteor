@@ -1,6 +1,4 @@
 import 'reflect-metadata';
-import { MATERIAL_PROVIDERS, MATERIAL_DIRECTIVES } from 'ng2-material';
-import { MdToolbar } from '@angular2-material/toolbar';
 
 import { Component, provide } from '@angular/core';
 import { HTTP_PROVIDERS } from '@angular/http';
@@ -18,7 +16,7 @@ import { AboutComponent } from './imports/about/about-component';
 @Component({
   selector: 'app',
   templateUrl: '/client/app.html',
-  directives: [ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar]
+  directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
   { path: '/', name: 'Home', component: HomeComponent },
@@ -59,4 +57,4 @@ class Socially extends MeteorComponent {
 
 }
 
-bootstrap(Socially, [ROUTER_PROVIDERS, MATERIAL_PROVIDERS, HTTP_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);
+bootstrap(Socially, [ROUTER_PROVIDERS, HTTP_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);

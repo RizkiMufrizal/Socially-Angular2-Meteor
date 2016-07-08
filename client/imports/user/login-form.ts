@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MD_INPUT_DIRECTIVES, MdInput } from '@angular2-material/input';
-import { MD_GRID_LIST_DIRECTIVES, MdGridList } from '@angular2-material/grid-list';
-import { MdButton } from 'ng2-material/components/button/button';
 import { FormBuilder, ControlGroup, Validators } from '@angular/common';
 import { Meteor } from 'meteor/meteor';
 
 @Component({
   selector: 'login-form',
-  templateUrl: '/client/imports/user/login-template.html',
-  directives: [MD_INPUT_DIRECTIVES, MdInput, MD_GRID_LIST_DIRECTIVES, MdGridList, MdButton]
+  templateUrl: '/client/imports/user/login-template.html'
 })
 export class LoginForm implements OnInit {
   loginForm: ControlGroup;
