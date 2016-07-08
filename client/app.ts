@@ -13,6 +13,7 @@ import { HomeComponent } from './imports/home/home-component';
 import { PostComponent } from './imports/post/post-component';
 import { RegisterForm } from './imports/user/register-form';
 import { LoginForm } from './imports/user/login-form';
+import { AboutComponent } from './imports/about/about-component';
 
 @Component({
   selector: 'app',
@@ -23,7 +24,8 @@ import { LoginForm } from './imports/user/login-form';
   { path: '/', name: 'Home', component: HomeComponent },
   { path: '/post', name: 'Post', component: PostComponent },
   { path: '/register', name: 'Register', component: RegisterForm },
-  { path: '/login', name: 'Login', component: LoginForm }
+  { path: '/login', name: 'Login', component: LoginForm },
+  { path: '/about', name: 'About', component: AboutComponent }
 ])
 class Socially extends MeteorComponent {
 
