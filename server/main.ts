@@ -7,4 +7,5 @@ import { TimeLines } from '../collections/timelines/timelines';
 Meteor.startup(() => {
   Posts.remove({});
   TimeLines.remove({});
+  Meteor.users.remove({});
 });
