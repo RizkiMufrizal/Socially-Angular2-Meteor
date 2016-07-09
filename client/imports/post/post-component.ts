@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { TimeAgoPipe } from 'angular2-moment';
 import * as _ from 'underscore';
 import { Posts } from '../../../collections/posts/posts';
+import { TimeLines } from '../../../collections/timelines/timelines';
 import { SecureComponent } from '../secure/secure-component';
 import { Router } from '@angular/router-deprecated';
 
@@ -15,10 +16,12 @@ import { Router } from '@angular/router-deprecated';
 export class PostComponent extends SecureComponent implements OnInit {
 
   posts: Mongo.Cursor<Object>;
+  timelines: Mongo.Cursor<Object>;
   idPost: String;
   inputComment: String;
   inputPost: String;
   comments: Array<Object>;
+  nameUserPost: String;
 
   constructor(router: Router) {
     super(router);
@@ -27,6 +30,9 @@ export class PostComponent extends SecureComponent implements OnInit {
   ngOnInit() {
     Meteor.subscribe('posts', () => {
       this.posts = Posts.find();
+    });
+    Meteor.subscribe('timelines', () => {
+      this.timelines = TimeLines.find();
     });
   }
 
@@ -44,11 +50,22 @@ export class PostComponent extends SecureComponent implements OnInit {
         console.log(error);
       }
       this.inputPost = '';
+
+      Meteor.call('simpanTimeLine', {
+        timeDate: new Date(),
+        status: 'post',
+        message: `${name} send post '${p}'`
+      }, (error) => {
+        if (error) {
+          console.log(error);
+        }
+      });
     });
   }
 
   newComment(c) {
     this.comments = c.comments;
+    this.nameUserPost = c.name;
     this.idPost = c._id;
   }
 
@@ -72,10 +89,20 @@ export class PostComponent extends SecureComponent implements OnInit {
       }
     );
 
+    Meteor.call('simpanTimeLine', {
+      timeDate: new Date(),
+      status: 'comment',
+      message: `${name} commented on ${this.nameUserPost}'s post`
+    }, (error) => {
+      if (error) {
+        console.log(error);
+      }
+    });
+
     this.inputComment = '';
   }
 
-  sendLike(idPost, l) {
+  sendLike(idPost, l, n) {
     let checkUser: Boolean;
     let idUser = Meteor.userId();
 
@@ -97,6 +124,17 @@ export class PostComponent extends SecureComponent implements OnInit {
         idUser: idUser,
         name: name,
       });
+
+      Meteor.call('simpanTimeLine', {
+        timeDate: new Date(),
+        status: 'like',
+        message: `${name} likes ${n}'s post`
+      }, (error) => {
+        if (error) {
+          console.log(error);
+        }
+      });
+
     } else {
       l = _.without(l, _.findWhere(l, {
         idUser: Meteor.userId(),
