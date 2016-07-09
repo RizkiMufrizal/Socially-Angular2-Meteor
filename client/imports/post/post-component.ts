@@ -29,10 +29,18 @@ export class PostComponent extends SecureComponent implements OnInit {
 
   ngOnInit() {
     Meteor.subscribe('posts', () => {
-      this.posts = Posts.find();
+      this.posts = Posts.find({}, {
+        sort: {
+          dateTime: -1
+        }
+      });
     });
     Meteor.subscribe('timelines', () => {
-      this.timelines = TimeLines.find();
+      this.timelines = TimeLines.find({}, {
+        sort: {
+          dateTime: -1
+        }
+      });
     });
   }
 
@@ -52,7 +60,7 @@ export class PostComponent extends SecureComponent implements OnInit {
       this.inputPost = '';
 
       Meteor.call('simpanTimeLine', {
-        timeDate: new Date(),
+        dateTime: new Date(),
         status: 'post',
         message: `${name} send post '${p}'`
       }, (error) => {
@@ -90,7 +98,7 @@ export class PostComponent extends SecureComponent implements OnInit {
     );
 
     Meteor.call('simpanTimeLine', {
-      timeDate: new Date(),
+      dateTime: new Date(),
       status: 'comment',
       message: `${name} commented on ${this.nameUserPost}'s post`
     }, (error) => {
@@ -126,7 +134,7 @@ export class PostComponent extends SecureComponent implements OnInit {
       });
 
       Meteor.call('simpanTimeLine', {
-        timeDate: new Date(),
+        dateTime: new Date(),
         status: 'like',
         message: `${name} likes ${n}'s post`
       }, (error) => {
