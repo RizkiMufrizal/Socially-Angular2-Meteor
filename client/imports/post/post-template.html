@@ -27,9 +27,9 @@
 
         </div>
         <div class="col-md-4">
-            <ul class="list-group">
+            <ul class="list-group" style="max-height: 400px; overflow-y:auto;">
                 <li *ngFor="let t of timelines" [ngClass]="t.status === 'post' ? 'list-group-item list-group-item-success' : t.status === 'comment' ? 'list-group-item list-group-item-info' : 'list-group-item'">
-                  {{t.message}} {{t.timeDate | amTimeAgo}}
+                  {{t.message}} {{t.dateTime | amTimeAgo}}
                 </li>
             </ul>
         </div>
