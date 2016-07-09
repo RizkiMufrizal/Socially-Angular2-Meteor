@@ -13,7 +13,7 @@ export class LoginForm implements OnInit {
     let rf = new FormBuilder();
 
     this.loginForm = rf.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
