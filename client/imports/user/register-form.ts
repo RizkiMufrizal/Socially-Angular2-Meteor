@@ -6,7 +6,7 @@ import { Router } from '@angular/router-deprecated';
 
 @Component({
   selector: 'register-form',
-  templateUrl: '/client/imports/user/register-template.html'
+  templateUrl: '/client/imports/user/register-template.html',
 })
 export class RegisterForm implements OnInit {
   registerForm: ControlGroup;
@@ -32,14 +32,15 @@ export class RegisterForm implements OnInit {
         status: 'register'
       }
     }, (error) => {
-      if (error) {
-        console.log(error);
+      if (typeof error !== 'undefined') {
+        alert(error.reason);
+      } else {
+        (<Control>this.registerForm.controls['username']).updateValue('');
+        (<Control>this.registerForm.controls['password']).updateValue('');
+        (<Control>this.registerForm.controls['name']).updateValue('');
+        alert('anda berhasil register');
+        this.router.navigate(['Login']);
       }
-
-      (<Control>this.registerForm.controls['username']).updateValue('');
-      (<Control>this.registerForm.controls['password']).updateValue('');
-      (<Control>this.registerForm.controls['name']).updateValue('');
-      this.router.navigate(['Login']);
     });
   }
 
