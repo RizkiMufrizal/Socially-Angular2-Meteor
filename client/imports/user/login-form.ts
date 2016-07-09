@@ -1,13 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ControlGroup, Validators } from '@angular/common';
 import { Meteor } from 'meteor/meteor';
+import { SweetAlertService } from 'ng2-sweetalert2';
 
 @Component({
   selector: 'login-form',
-  templateUrl: '/client/imports/user/login-template.html'
+  templateUrl: '/client/imports/user/login-template.html',
+  providers: [SweetAlertService]
 })
 export class LoginForm implements OnInit {
   loginForm: ControlGroup;
+
+  swalService: SweetAlertService;
+
+  static get parameters() {
+    return [[SweetAlertService]];
+  }
+
+  constructor(swal) {
+    this.swalService = swal;
+  }
 
   ngOnInit() {
     let rf = new FormBuilder();
@@ -25,7 +37,7 @@ export class LoginForm implements OnInit {
 
     Meteor.loginWithPassword(username, password, (error) => {
       if (typeof error !== 'undefined') {
-        alert(error.reason);
+        this.swalService.swal('Warning', error.reason, 'error');
       } else {
         var user = Meteor.users.findOne(Meteor.userId());
 
@@ -42,7 +54,7 @@ export class LoginForm implements OnInit {
           }
         );
 
-        alert('berhasil login');
+        this.swalService.swal('Info', 'anda berhasil login', 'success');
         window.location.href = '/post';
       }
     });
