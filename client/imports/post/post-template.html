@@ -12,7 +12,7 @@
                         <small class="text-muted">{{p.dateTime | amTimeAgo}}</small>
                     </p>
                     <p class="card-text">{{p.status}}</p>
-                    <button (click)="sendLike(p._id, p.likes)" class="btn btn-link card-link">
+                    <button (click)="sendLike(p._id, p.likes, p.name)" class="btn btn-link card-link">
                         <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                         {{p.likes.length}}
                         Like
@@ -28,10 +28,9 @@
         </div>
         <div class="col-md-4">
             <ul class="list-group">
-                <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
-                <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
-                <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>
-                <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+                <li *ngFor="let t of timelines" [ngClass]="t.status === 'post' ? 'list-group-item list-group-item-success' : t.status === 'comment' ? 'list-group-item list-group-item-info' : 'list-group-item'">
+                  {{t.message}} {{t.timeDate | amTimeAgo}}
+                </li>
             </ul>
         </div>
     </div>
